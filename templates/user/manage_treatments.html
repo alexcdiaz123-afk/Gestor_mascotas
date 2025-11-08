@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Control de Tratamientos</h3>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Mascota</label>
+    <select name="pet_id" class="form-select" required>
+      {% for pet in pets %}
+        <option value="{{ pet.id }}">{{ pet.name }} ({{ pet.species }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Tipo</label>
+    <select name="treatment_type" class="form-select">
+      <option>Vacuna</option>
+      <option>Desparasitación</option>
+      <option>Control</option>
+      <option>Otro</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Fecha de aplicación</label>
+    <input type="date" name="applied_date" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Próxima fecha (opcional)</label>
+    <input type="date" name="next_date" class="form-control">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-warning">Guardar</button>
+    <a href="{{ url_for('user.dashboard') }}" class="btn btn-secondary">Cancelar</a>
+  </div>
+ </form>
+{% endblock %}

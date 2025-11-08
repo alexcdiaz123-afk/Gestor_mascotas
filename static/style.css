@@ -1,0 +1,26 @@
+:root {
+  --primary: #6f42c1; /* purple */
+  --secondary: #20c997; /* teal */
+  --accent: #fd7e14; /* orange */
+  --bg: #f7f6fb;
+}
+
+body { background-color: var(--bg); }
+
+.gradient-navbar {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.card { box-shadow: 0 8px 24px rgba(0,0,0,.06); border: 0; border-radius: 12px; }
+.card-title { font-weight: 700; }
+
+.btn-primary { background-color: var(--primary); border-color: var(--primary); }
+.btn-warning { background-color: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-success { background-color: var(--secondary); border-color: var(--secondary); }
+
+.soft-alert { border-radius: 10px; }
+
+table.table thead th { background-color: #efe9fb; color: #3c2a6e; }
+table.table tbody tr:hover { background-color: #f1fffb; }
+
+h2, h3, h4 { color: #3c2a6e; }

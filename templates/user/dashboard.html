@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>🏠 Mi Dashboard</h2>
+  <span class="badge bg-secondary">Acciones Rápidas</span>
+ </div>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">🐾 Registrar Mascota</h5>
+        <p class="card-text">Agrega una nueva mascota al sistema.</p>
+        <a href="{{ url_for('user.add_pet') }}" class="btn btn-primary">Registrar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">💉 Control Tratamientos</h5>
+        <p class="card-text">Gestiona tratamientos y vacunas.</p>
+        <a href="{{ url_for('user.manage_treatments') }}" class="btn btn-warning">Gestionar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">🗓️ Programar Cita</h5>
+        <p class="card-text">Crea una nueva cita veterinaria.</p>
+        <a href="{{ url_for('user.schedule_appointment') }}" class="btn btn-success">Programar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">🤖 Predicciones ML</h5>
+        <p class="card-text">Consulta estimaciones de próximas citas y vacunas.</p>
+        <a href="{{ url_for('user.predictions') }}" class="btn btn-primary">Ver predicciones</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">🗓️ Agenda</h5>
+        <p class="card-text">Revisa las citas y vacunas programadas.</p>
+        <a href="{{ url_for('user.agenda') }}" class="btn btn-success">Ver agenda</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4>🐶 Mis Mascotas</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Especie</th>
+      <th>Edad</th>
+      <th>Próxima cita/vacuna (estimada)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pet in pets %}
+      <tr>
+        <td>{{ pet.name }}</td>
+        <td>{{ pet.species }}</td>
+        <td>{{ pet.age }}</td>
+        <td>
+          {% set pred = predictions.get(pet.id) %}
+          {% if pred %}
+            {{ pred.strftime('%Y-%m-%d') }}
+          {% else %}
+            No disponible
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

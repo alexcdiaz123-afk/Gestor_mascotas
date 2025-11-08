@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: gestor-mascotas-flask
+    env: python
+    buildCommand: pip install -r requirements.txt
+    preDeployCommand: flask db upgrade
+    startCommand: gunicorn wsgi:app
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: DATABASE_URL
+        value: postgresql://alex1:DKVGIi5VUNnzTB2E9COqVpCMZ38TksOH@dpg-d4786hjipnbc73cmaf30-a.oregon-postgres.render.com/mascotas01?sslmode=require
+      - key: FLASK_APP
+        value: wsgi.py
+      # Configure DATABASE_URL desde servicio PostgreSQL de Render
+      # Ejemplo: postgres://usuario:pass@host:5432/dbname

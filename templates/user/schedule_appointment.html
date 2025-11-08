@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Programar Cita</h3>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Mascota</label>
+    <select name="pet_id" class="form-select" required>
+      {% for pet in pets %}
+        <option value="{{ pet.id }}">{{ pet.name }} ({{ pet.species }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Tipo de cita</label>
+    <input type="text" name="appointment_type" class="form-control" value="Consulta" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Fecha</label>
+    <input type="date" name="date" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Notas</label>
+    <input type="text" name="notes" class="form-control">
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-success">Programar</button>
+    <a href="{{ url_for('user.dashboard') }}" class="btn btn-secondary">Cancelar</a>
+  </div>
+ </form>
+{% endblock %}

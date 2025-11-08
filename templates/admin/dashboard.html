@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard Administrador</h2>
+
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card text-bg-primary">
+      <div class="card-body">
+        <h5 class="card-title">Usuarios</h5>
+        <p class="card-text display-6">{{ stats['usuarios'] }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-success">
+      <div class="card-body">
+        <h5 class="card-title">Mascotas</h5>
+        <p class="card-text display-6">{{ stats['mascotas'] }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-warning">
+      <div class="card-body">
+        <h5 class="card-title">Citas</h5>
+        <p class="card-text display-6">{{ stats['citas'] }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-bg-danger">
+      <div class="card-body">
+        <h5 class="card-title">Tratamientos</h5>
+        <p class="card-text display-6">{{ stats['tratamientos'] }}</p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>Usuarios</h4>
+    <ul class="list-group mb-4">
+      {% for u in users %}
+        <li class="list-group-item">{{ u.name }} ({{ u.email }}) - Rol: {{ u.role }}</li>
+      {% endfor %}
+    </ul>
+
+    <h4>Mascotas</h4>
+    <ul class="list-group mb-4">
+      {% for p in pets %}
+        <li class="list-group-item">{{ p.name }} - {{ p.species }} (Dueño: {{ p.owner.name }})</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h4>Citas</h4>
+    <ul class="list-group mb-4">
+      {% for a in appointments %}
+        <li class="list-group-item">{{ a.date }} - {{ a.appointment_type }} (Mascota: {{ a.pet.name }})</li>
+      {% endfor %}
+    </ul>
+
+    <h4>Tratamientos</h4>
+    <ul class="list-group">
+      {% for t in treatments %}
+        <li class="list-group-item">{{ t.applied_date }} - {{ t.treatment_type }} (Mascota: {{ t.pet.name }})</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

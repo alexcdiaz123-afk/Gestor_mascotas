@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Registrar Mascota</h3>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Nombre</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Especie</label>
+    <input type="text" name="species" class="form-control" placeholder="perro/gato/ave/otro" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Raza</label>
+    <input type="text" name="breed" class="form-control">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Edad (años)</label>
+    <input type="number" name="age" min="1" class="form-control" required>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('user.dashboard') }}" class="btn btn-secondary">Cancelar</a>
+  </div>
+ </form>
+{% endblock %}
