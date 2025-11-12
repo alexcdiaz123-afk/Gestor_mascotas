@@ -44,4 +44,21 @@ def create_app():
     app.register_blueprint(user_bp)
     app.register_blueprint(admin_bp)
 
+    # Ruta raíz
+    @app.route("/")
+    def index():
+        from flask_login import current_user
+        from flask import redirect, url_for
+        if current_user.is_authenticated:
+            if current_user.is_admin():
+                return redirect(url_for("admin.dashboard"))
+            return redirect(url_for("user.dashboard"))
+        return redirect(url_for("auth.login"))
+
+    # Ruta para favicon (evita 404)
+    @app.route("/favicon.ico")
+    def favicon():
+        from flask import Response
+        return Response(status=204)  # No Content - evita el 404
+
     return app
