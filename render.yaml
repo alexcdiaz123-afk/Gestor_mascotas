@@ -2,7 +2,7 @@ services:
   - type: web
     name: gestor-mascotas-flask
     env: python
-    pythonVersion: 3.11
+    pythonVersion: 3.13
     buildCommand: pip install --upgrade pip setuptools wheel && pip install --no-cache-dir -r requirements.txt
     preDeployCommand: flask db upgrade
     startCommand: gunicorn wsgi:app --bind 0.0.0.0:$PORT
@@ -10,7 +10,7 @@ services:
     plan: free
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11
+        value: 3.13.4
       - key: DATABASE_URL
         value: postgresql://alex1:DKVGIi5VUNnzTB2E9COqVpCMZ38TksOH@dpg-d4786hjipnbc73cmaf30-a.oregon-postgres.render.com/mascotas01?sslmode=require
       - key: FLASK_APP
