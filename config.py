@@ -4,7 +4,10 @@ import os
 def _normalize_database_url(url: str) -> str:
     # Normaliza esquema y añade SSL si Render Postgres
     if url.startswith("postgres://"):
-        url = url.replace("postgres://", "postgresql://", 1)
+        url = url.replace("postgres://", "postgresql+psycopg://", 1)
+    elif url.startswith("postgresql://"):
+        # Usar psycopg3 (psycopg) en lugar de psycopg2
+        url = url.replace("postgresql://", "postgresql+psycopg://", 1)
     # Render Postgres requiere SSL en conexiones externas
     if "render.com" in url and "sslmode=" not in url and "ssl=" not in url:
         sep = "&" if "?" in url else "?"
